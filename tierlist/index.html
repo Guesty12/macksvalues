@@ -14,14 +14,14 @@
 :root{--bg1:#06223a;--bg2:#0b4a63;--panel:rgba(8,32,52,.72);--line:rgba(140,220,255,.25);--text:#eaf6ff;--mute:#8fb4c9;--gold:#ffc83d;--legendary:#ffc83d;--mythic:#b98cff;--premium:#ff5fd2;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
 *,*::before,*::after{box-sizing:inherit}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;min-height:100vh;font-family:'Nunito',system-ui,sans-serif;color:var(--text);background:linear-gradient(160deg,var(--bg1),var(--bg2) 55%,#08334d);background-size:200% 200%;animation:sea 18s ease-in-out infinite alternate;overflow-x:hidden}
+body{margin:0;min-height:100vh;font-family:'Nunito',system-ui,sans-serif;color:var(--text);background:linear-gradient(160deg,var(--bg1),var(--bg2) 55%,#08334d);background-size:200% 200%;animation:sea 18s ease-in-out infinite alternate;overflow-x:hidden;display:flex;flex-direction:column}
 @keyframes sea{to{background-position:100% 100%}}
 body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 80% 10%,rgba(255,200,61,.16),transparent 40%),radial-gradient(circle at 10% 90%,rgba(60,200,255,.14),transparent 45%)}
 header{position:relative;padding:18px 26px}
 .logo{font-family:'Lilita One',Impact,sans-serif;font-size:clamp(28px,4vw,40px);color:#fff;margin:0;letter-spacing:.5px;text-shadow:0 3px 0 rgba(0,0,0,.35);display:inline-block}
 .logo a{color:inherit;text-decoration:none}
 .logo-ico{height:1em;width:1em;vertical-align:-.12em;margin-left:.08em;filter:drop-shadow(0 3px 0 rgba(0,0,0,.35))}
-main{position:relative;max-width:1000px;margin:0 auto;padding:0 18px 48px}
+main{position:relative;flex:1 0 auto;width:100%;max-width:1000px;margin:0 auto;padding:0 18px 48px}
 .frame{background:var(--panel);border:2px solid var(--line);border-radius:20px;padding:16px;backdrop-filter:blur(6px)}
 .frame h2{margin:0 0 12px;font-family:'Lilita One',Impact,sans-serif;font-weight:400;font-size:24px;display:flex;justify-content:space-between;align-items:baseline}
 .frame h2 span{font-family:'Nunito',sans-serif;font-size:15px;color:var(--gold);font-weight:800}
@@ -55,15 +55,27 @@ main{position:relative;max-width:1000px;margin:0 auto;padding:0 18px 48px}
 .sheet .lbl{margin:0;color:var(--mute);font-weight:800;font-size:14px}
 .badge{display:inline-block;margin:14px 0 20px;font-family:'Lilita One',Impact,sans-serif;font-size:22px;color:#1a0f00;background:var(--c);border-radius:999px;padding:6px 22px}
 .ver{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:20px;font-family:'Lilita One',Impact,sans-serif;font-size:20px;line-height:1;color:#fff;letter-spacing:.5px;text-shadow:0 3px 0 rgba(0,0,0,.35)}
-.socials{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:26px}
-.socials .lbl{font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;color:var(--mute);margin-bottom:2px}
-.soc{display:inline-flex;align-items:center;gap:10px;font-weight:800;font-size:16px;color:var(--text);text-decoration:none}
+.socials{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px}
+.socials .lbl{font-family:'Nunito',sans-serif;font-weight:800;font-size:15px;color:var(--f-text)}
+.soc{display:inline-flex;align-items:center;gap:10px;font-weight:800;font-size:16px;color:var(--f-text);text-decoration:none}
 .soc svg{width:26px;height:26px;flex:none}
 a.soc{transition:transform .15s,color .15s}
-a.soc:hover{transform:translateY(-2px);color:#fff}
+a.soc:hover{transform:translateY(-2px);color:var(--f-hover)}
 a.soc:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:8px}
-.soc.soon{color:var(--mute);cursor:default}
-@media(max-width:640px){header{padding:14px 16px}.btn{padding:12px 34px}.grid{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}}
+.soc.soon{opacity:.7;cursor:default}
+footer{--f-text:#8793ad;--f-hover:#d3dcf0;position:relative;flex:none;margin-top:24px;background:#080a10;border-top:1px solid rgba(255,255,255,.06);padding:38px 26px 34px}
+.f-in{max-width:1000px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+.f-brand{display:flex;align-items:center;gap:24px}
+.f-logo{flex:none;width:76px;height:76px;padding:7px;border-radius:22px;background:linear-gradient(160deg,#fff,#d6e8ff);box-shadow:0 0 0 7px rgba(120,190,255,.07),0 0 38px rgba(60,160,255,.28)}
+.f-logo img{display:block;width:100%;height:100%;object-fit:contain}
+.f-name{font-weight:800;font-size:clamp(26px,5vw,40px);line-height:1.1;color:var(--f-text);letter-spacing:-.2px}
+.f-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 40px}
+.f-nav{display:flex;flex-wrap:wrap;gap:8px 36px}
+.f-link{font:inherit;font-weight:600;font-size:19px;color:var(--f-text);background:none;border:0;padding:4px 0;cursor:pointer;transition:color .15s}
+.f-link:hover{color:var(--f-hover)}
+.f-link:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:6px}
+.f-copy{margin:0;font-weight:600;font-size:17px;color:var(--f-text)}
+@media(max-width:640px){header{padding:14px 16px}.btn{padding:12px 34px}footer{padding:30px 16px 28px}.f-logo{width:64px;height:64px;border-radius:18px}.f-brand{gap:18px}.grid{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -77,18 +89,33 @@ a.soc:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radi
   <div class="actions">
     <a class="btn done" href="https://macksvalues.vercel.app">Trade</a>
   </div>
-  <div class="socials">
-    <span class="lbl">Our socials: </span>
-    <a class="soc" href="https://t.me/js_mackas_channel" target="_blank" rel="noopener noreferrer">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#27a7e7"/><path fill="#fff" d="M5.4 11.9l11.1-4.3c.5-.2 1 .1.8.9l-1.9 8.9c-.1.6-.5.8-1 .5l-2.9-2.1-1.4 1.4c-.2.2-.3.3-.6.3l.2-3 5.4-4.9c.2-.2 0-.3-.4-.1l-6.7 4.2-2.9-.9c-.6-.2-.6-.6.1-.9z"/></svg>
-      <span>Telegram channel</span>
-    </a>
-    <span class="soc soon">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#5865f2" d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
-      <span>coming soon</span>
-    </span>
-  </div>
 </main>
+<footer>
+  <div class="f-in">
+    <div class="f-brand">
+      <div class="f-logo"><img id="fLogo" alt="" width="160" height="160"></div>
+      <span class="f-name">Macks Values</span>
+    </div>
+    <div class="f-row">
+      <nav class="f-nav" aria-label="Footer">
+        <button type="button" class="f-link" id="fHome">Home</button>
+        <button type="button" class="f-link" id="fTrade">Trade</button>
+      </nav>
+      <div class="socials">
+        <span class="lbl">Our socials: </span>
+        <a class="soc" href="https://t.me/js_mackas_channel" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#27a7e7"/><path fill="#fff" d="M5.4 11.9l11.1-4.3c.5-.2 1 .1.8.9l-1.9 8.9c-.1.6-.5.8-1 .5l-2.9-2.1-1.4 1.4c-.2.2-.3.3-.6.3l.2-3 5.4-4.9c.2-.2 0-.3-.4-.1l-6.7 4.2-2.9-.9c-.6-.2-.6-.6.1-.9z"/></svg>
+          <span>Telegram channel</span>
+        </a>
+        <span class="soc soon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#5865f2" d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
+          <span>coming soon</span>
+        </span>
+      </div>
+    </div>
+    <p class="f-copy">&copy; Macks Values. All rights reserved.</p>
+  </div>
+</footer>
 <div id="modal" role="dialog" aria-modal="true" aria-label="Item details">
   <div class="sheet" id="sheet">
     <h3 id="mn"></h3>
@@ -131,6 +158,9 @@ $("q").oninput=e=>fill(e.target.value);
 $("close").onclick=closeModal;
 $("modal").onclick=e=>{if(e.target.id==="modal")closeModal()};
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+$("fLogo").src=document.querySelector(".logo-ico").src;
+$("fHome").onclick=()=>window.scrollTo({top:0,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
+$("fTrade").onclick=()=>{window.location.href="https://macksvalues.vercel.app/"};
 fill("");
 </script>
 </body>
