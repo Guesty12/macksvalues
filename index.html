@@ -145,7 +145,7 @@ footer::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:72
 .xbtn{font-size:20px}
 .help:hover,.xbtn:hover{transform:translateY(-2px);border-color:var(--pumpkin);background:rgba(255,138,31,.15)}
 .help:active,.xbtn:active{transform:scale(.92)}
-.help:focus-visible,.xbtn:focus-visible,.typebtn:focus-visible,.back:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.help:focus-visible,.xbtn:focus-visible,.typebtn:focus-visible,.back:focus-visible,#iq:focus-visible,.multibtn:focus-visible,.chip:focus-visible,.icard:focus-visible,.seg button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .deco .moon{right:clamp(124px,11vw,150px)}
 #clModal{position:fixed;inset:0;background:rgba(2,12,22,.7);display:none;align-items:center;justify-content:center;padding:16px;z-index:10;backdrop-filter:blur(3px)}
 #clModal.open{display:flex}
@@ -154,22 +154,96 @@ footer::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:72
 #clList{overflow-y:auto;display:flex;flex-direction:column;gap:6px}
 .crow{display:flex;justify-content:space-between;gap:10px;align-items:center;font-weight:800;background:rgba(255,255,255,.05);border-left:5px solid var(--c);border-radius:10px;padding:10px 12px}
 .crow b{color:var(--c);white-space:nowrap}
-.typehead{margin:2px 0 12px;font-family:'Lilita One',Impact,sans-serif;font-weight:400;font-size:clamp(22px,5vw,26px);text-align:center}
 .types{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .typebtn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font:inherit;color:var(--text);text-align:center;background:rgba(255,255,255,.05);border:2px solid var(--c);border-radius:14px;padding:20px 8px;cursor:pointer;transition:transform .15s,background .15s}
 .typebtn:hover{transform:translateY(-3px);background:rgba(255,200,61,.12)}
 .typebtn:active{transform:scale(.96)}
 .typebtn strong{font-family:'Lilita One',Impact,sans-serif;font-weight:400;font-size:24px;color:var(--c)}
 .typebtn span{font-weight:800;font-size:13px;color:var(--mute)}
-.pickbar{display:flex;gap:8px;margin-bottom:10px}
-.pickbar #q{margin-bottom:0;flex:1;min-width:0}
 .back{flex:none;font:inherit;font-weight:800;font-size:20px;line-height:1;color:var(--text);background:rgba(255,255,255,.08);border:2px solid var(--line);border-radius:12px;padding:0 14px;cursor:pointer}
 .back:hover{background:rgba(255,255,255,.18)}
-#pickStep{display:flex;flex-direction:column;min-height:0}
-#typeStep[hidden],#pickStep[hidden]{display:none}
 @media(max-width:640px){.deco .moon{right:122px}.ver{gap:6px;font-size:18px}.help{width:30px;height:30px;font-size:17px}}
 @media(max-width:480px){.deco .moon{display:none}}
 /* ===== end v1.6 ===== */
+/* ===== v1.7: "Add an item" window ===== */
+#modal .sheet{width:min(940px,100%);height:min(88vh,740px);max-height:none;padding:0;overflow:hidden;animation:winIn .35s cubic-bezier(.2,1.3,.4,1)}
+@keyframes winIn{0%{transform:translateY(26px) scale(.95);opacity:0}100%{transform:none;opacity:1}}
+@keyframes viewIn{0%{transform:translateX(22px);opacity:0}100%{transform:none;opacity:1}}
+@keyframes cardIn{0%{transform:translateY(14px) scale(.94);opacity:0}100%{transform:none;opacity:1}}
+@keyframes chkPop{0%{transform:scale(.4)}60%{transform:scale(1.25)}100%{transform:scale(1)}}
+@keyframes chipPop{0%{transform:scale(.92)}60%{transform:scale(1.07)}100%{transform:scale(1)}}
+@keyframes shake{20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+@keyframes slideUp{0%{transform:translateY(100%);opacity:0}100%{transform:none;opacity:1}}
+.aview{display:flex;flex-direction:column;height:100%;min-height:0;animation:viewIn .28s ease-out}
+.aview[hidden]{display:none}
+.ah{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:18px 20px 14px;border-bottom:1px solid var(--line)}
+.ah h2{margin:0;font-family:'Lilita One',Impact,sans-serif;font-weight:400;font-size:clamp(24px,5vw,30px);letter-spacing:.3px}
+.ah p{margin:2px 0 0;color:var(--mute);font-weight:700;font-size:14px}
+.vt{display:flex;align-items:center;gap:14px}
+.back{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;transition:transform .15s,background .15s}
+.back:hover{transform:translateX(-3px)}
+.atools{display:flex;flex-wrap:wrap;gap:10px;padding:14px 20px 0}
+.sbox{position:relative;flex:1 1 200px;min-width:0;display:block}
+.sbox svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--mute);pointer-events:none}
+#iq{width:100%;font:inherit;font-weight:800;font-size:16px;color:var(--text);background:rgba(255,255,255,.08);border:2px solid var(--line);border-radius:12px;padding:11px 14px 11px 42px;transition:border-color .15s,background .15s}
+#iq:focus{border-color:var(--gold);background:rgba(255,255,255,.12)}
+.multibtn{font:inherit;font-weight:800;font-size:15px;display:inline-flex;align-items:center;gap:8px;color:var(--text);white-space:nowrap;background:rgba(255,255,255,.06);border:2px solid var(--line);border-radius:12px;padding:0 16px;min-height:46px;cursor:pointer;transition:transform .15s,background .15s,border-color .15s,color .15s}
+.multibtn svg{width:18px;height:18px}
+.multibtn:hover{transform:translateY(-2px);background:rgba(255,255,255,.14)}
+.multibtn:active{transform:scale(.96)}
+.multibtn[aria-pressed=true]{background:rgba(255,200,61,.18);border-color:var(--gold);color:var(--gold)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:12px 20px 14px;border-bottom:1px solid var(--line)}
+.chip{font:inherit;font-weight:800;font-size:15px;display:inline-flex;align-items:center;gap:8px;color:var(--mute);background:rgba(255,255,255,.04);border:2px solid var(--line);border-radius:12px;padding:7px 14px;cursor:pointer;transition:transform .15s,color .15s,background .15s,border-color .15s}
+.chip i{font-style:normal;font-size:13px;opacity:.75}
+.chip:hover{transform:translateY(-2px);color:var(--text);background:rgba(255,255,255,.1)}
+.chip:active{transform:scale(.95)}
+.chip[aria-pressed=true]{color:#2a1a00;background:linear-gradient(180deg,#ffe27a,var(--gold));border-color:var(--gold);animation:chipPop .3s ease-out}
+.abody{flex:1;min-height:0;overflow-y:auto;padding:16px 20px;scrollbar-color:var(--line) transparent}
+.agrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;align-content:start}
+.agrid .none{grid-column:1/-1}
+.icard{position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:16px;min-height:92px;text-align:left;font:inherit;color:var(--text);background:linear-gradient(160deg,rgba(255,255,255,.09),rgba(255,255,255,.02));border:2px solid var(--line);border-radius:14px;padding:12px 12px 10px;cursor:pointer;animation:cardIn .35s cubic-bezier(.2,1.2,.4,1) backwards;animation-delay:var(--d,0ms);transition:transform .15s,border-color .15s,background .15s,box-shadow .15s}
+.icard:hover{transform:translateY(-3px);border-color:var(--gold);background:rgba(255,200,61,.1)}
+.icard:active{transform:scale(.96)}
+.icard .nm{font-weight:800;font-size:16px;line-height:1.15;padding-right:24px;word-break:break-word}
+.icard .meta{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-weight:800;font-size:12px;color:var(--mute)}
+.icard .meta em{font-style:normal;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.icard .meta em.po{color:var(--pumpkin)}
+.icard .meta b{flex:none;font-size:15px;color:var(--c)}
+.icard .chk{position:absolute;top:10px;right:10px;width:20px;height:20px;border-radius:50%;border:2px solid var(--line);display:none;place-items:center;font-size:12px;font-weight:900;color:transparent;transition:background .15s,border-color .15s}
+.multi .icard .chk{display:grid}
+.icard.on{border-color:var(--gold);background:rgba(255,200,61,.16);box-shadow:0 0 0 2px rgba(255,200,61,.25)}
+.icard.on .chk{background:var(--gold);border-color:var(--gold);color:#2a1a00;animation:chkPop .25s ease-out}
+.icard.shake{animation:shake .35s}
+.afoot{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 20px;border-top:1px solid var(--line);background:rgba(4,20,34,.65);animation:slideUp .25s ease-out}
+.afoot[hidden],.afoot [hidden]{display:none}
+.afoot .fl{display:flex;align-items:center;gap:14px;flex-wrap:wrap;min-width:0}
+.afoot .rm{margin:0;padding:8px 12px}
+#msel,#vInfo{font-weight:800;color:var(--mute)}
+.afoot .btn{font-size:18px;padding:10px 22px;border-radius:12px;white-space:nowrap;flex:none}
+.afoot .btn.done{box-shadow:0 5px 0 #a56a00,0 8px 20px rgba(255,200,61,.3)}
+.afoot .btn:disabled{opacity:.4;cursor:not-allowed;animation:none;transform:none;box-shadow:0 4px 0 #a56a00}
+.vbody{flex:1;min-height:0;overflow-y:auto;padding:20px}
+.vbody .types{max-width:560px;margin:0 auto}
+.vbody .typebtn{padding:30px 10px;animation:cardIn .35s cubic-bezier(.2,1.2,.4,1) backwards}
+.vbody .typebtn:nth-child(2){animation-delay:.07s}
+.typebtn .tv{font-family:'Lilita One',Impact,sans-serif;font-size:24px;color:var(--text)}
+.vlist{display:flex;flex-direction:column;gap:8px}
+.vrow{display:flex;justify-content:space-between;align-items:center;gap:10px 14px;flex-wrap:wrap;background:rgba(255,255,255,.05);border-radius:12px;padding:10px 12px;animation:cardIn .3s ease-out backwards;animation-delay:var(--d,0ms)}
+.vrow .vn{font-weight:800;font-size:16px}
+.seg{display:inline-flex}
+.seg button{font:inherit;font-weight:800;font-size:13px;display:inline-flex;gap:6px;align-items:baseline;color:var(--mute);background:rgba(255,255,255,.05);border:2px solid var(--line);padding:6px 12px;cursor:pointer;transition:background .15s,color .15s,border-color .15s}
+.seg button:first-child{border-radius:10px 0 0 10px}
+.seg button:last-child{border-radius:0 10px 10px 0;border-left:0}
+.seg button b{font-size:14px}
+.seg button:hover:not(:disabled):not(.on){background:rgba(255,255,255,.14)}
+.seg button.on[data-v=n]{background:#4db8ff;border-color:#4db8ff;color:#06223a}
+.seg button.on[data-v=p]{background:var(--pumpkin);border-color:var(--pumpkin);color:#1a0f00}
+.seg button:disabled{opacity:.35;cursor:not-allowed}
+#modal .sheet.compact{height:auto}
+.sheet.compact .aview{height:auto;max-height:min(88vh,740px)}
+@media(max-width:640px){.sheet.compact .aview{max-height:92vh}.icard .meta em:not(.po){display:none}.icard .meta{justify-content:flex-end}.icard .meta em.po{margin-right:auto}#modal{padding:8px}#modal .sheet{height:92vh}.ah{padding:14px 14px 12px}.atools{padding:12px 14px 0}.chips{padding:10px 14px 12px}.abody,.vbody{padding:12px 14px}.afoot{padding:10px 14px}.agrid{grid-template-columns:repeat(auto-fill,minmax(138px,1fr))}.multibtn{flex:1;justify-content:center}}
+/* ===== end v1.7 ===== */
+
 </style>
 </head>
 <body>
@@ -216,23 +290,36 @@ footer::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:72
     <p class="f-copy">&copy; Macks Values. All rights reserved.</p>
   </div>
 <div class="web2" aria-hidden="true"><svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"><path d="M0 0L120.0 0.0M0 0L110.9 45.9M0 0L84.9 84.9M0 0L45.9 110.9M0 0L0.0 120.0M24.0 0.0Q20.2 4.0 22.2 9.2M22.2 9.2Q17.2 11.5 17.0 17.0M17.0 17.0Q11.5 17.2 9.2 22.2M9.2 22.2Q4.0 20.2 0.0 24.0M46.0 0.0Q38.8 7.7 42.5 17.6M42.5 17.6Q32.9 22.0 32.5 32.5M32.5 32.5Q22.0 32.9 17.6 42.5M17.6 42.5Q7.7 38.8 0.0 46.0M70.0 0.0Q59.0 11.7 64.7 26.8M64.7 26.8Q50.1 33.4 49.5 49.5M49.5 49.5Q33.4 50.1 26.8 64.7M26.8 64.7Q11.7 59.0 0.0 70.0M96.0 0.0Q81.0 16.1 88.7 36.7M88.7 36.7Q68.6 45.9 67.9 67.9M67.9 67.9Q45.9 68.6 36.7 88.7M36.7 88.7Q16.1 81.0 0.0 96.0"/></svg></div></footer>
-<div id="modal" role="dialog" aria-modal="true" aria-label="Choose an item">
+<div id="modal" role="dialog" aria-modal="true" aria-labelledby="aTitle">
   <div class="sheet">
-    <div id="typeStep">
-      <h2 class="typehead">Select item type</h2>
-      <div class="types">
-        <button type="button" class="typebtn" id="tNormal" style="--c:#4db8ff"><strong>Normal</strong><span>Regular item values</span></button>
-        <button type="button" class="typebtn" id="tPerm" style="--c:var(--pumpkin)"><strong>Permanent</strong><span>Permanent fruit values</span></button>
+    <div class="aview" id="addView">
+      <div class="ah">
+        <div><h2 id="aTitle">Add an item</h2><p>Search for an item to add to your trade.</p></div>
+        <button type="button" class="xbtn" id="aClose" aria-label="Close">&times;</button>
+      </div>
+      <div class="atools">
+        <label class="sbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="iq" type="search" placeholder="Search items" aria-label="Search items" autocomplete="off"></label>
+        <button type="button" class="multibtn" id="multiBtn" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6l2 2 3-3.5M3 13l2 2 3-3.5M3 20l2 2 3-3.5M12 7h9M12 14h9M12 21h9" transform="translate(0 -3)"/></svg><span>Select multiple</span></button>
+      </div>
+      <div class="chips" role="group" aria-label="Categories">
+        <button type="button" class="chip" data-cat="all" aria-pressed="true">All <i id="c-all"></i></button>
+        <button type="button" class="chip" data-cat="fl" aria-pressed="false">Fruits &amp; Limiteds <i id="c-fl"></i></button>
+        <button type="button" class="chip" data-cat="gp" aria-pressed="false">Gamepasses <i id="c-gp"></i></button>
+      </div>
+      <div class="abody" id="abody"><div class="agrid" id="agrid"></div></div>
+      <div class="afoot" id="aFoot" hidden>
+        <div class="fl"><button type="button" class="rm" id="rm" hidden>Remove item from this cell</button><span id="msel" hidden></span></div>
+        <button type="button" class="btn done" id="madd" hidden disabled>Add items</button>
       </div>
     </div>
-    <div id="pickStep" hidden>
-      <div class="pickbar">
-        <button type="button" class="back" id="back" aria-label="Back to item type">&larr;</button>
-        <input id="q" type="search" placeholder="Search items" autocomplete="off">
+    <div class="aview" id="verView" hidden>
+      <div class="ah">
+        <div class="vt"><button type="button" class="xbtn back" id="vBack" aria-label="Back to items">&larr;</button><div><h2 id="vTitle"></h2><p id="vSub"></p></div></div>
+        <button type="button" class="xbtn" id="vClose" aria-label="Close">&times;</button>
       </div>
-      <div id="list"></div>
+      <div class="vbody" id="vBody"></div>
+      <div class="afoot" id="vFoot" hidden><span id="vInfo"></span><button type="button" class="btn done" id="vAdd">Add to trade</button></div>
     </div>
-    <button class="rm" id="rm" hidden>Remove item from this cell</button>
   </div>
 </div>
 <div id="clModal" role="dialog" aria-modal="true" aria-labelledby="clTitle">
@@ -242,7 +329,7 @@ footer::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:72
   </div>
 </div>
 <script>
-const RAW="Blizzard|26;Shadow|25;Mammoth|28;Gravity|31;Pain|48;Spirit|36;Lime Blade|28;Buddha|56;Portal|56;Celebration Bomb|42;Topaz Diamond|64;T-Rex|105;Venom|645;Glacier Eagle|40;Scarlet Ghost|51;Dough|120;Lightning|74;Gas|300;Yeti|430;Tiger|450;Torment Pain|410;Hellfire Gas|465;Control|500;Ruby Diamond|95;Requirem Eagle|545;Yellow Lightning|480;Emerald Diamond|530;Green Lightning|635;Rose Quartz Diamond|600;Fast Boats Pass|480;X2 Boss Drops Pass|430;Starlight Gravity|800;Matrix Eagle|640;+1 Fruit Storage Pass|800;Thermite Bomb|965;X2 Mastery Pass|800;X2 Money Pass|800;Legendary Scrolls Product|1100;Kitsune|1300;Nuclear Bomb|990;Azura Bomb|1000;Frustration Pain|1500;Sadness Pain|1450;Magnet|1150;Celestial Pain|1750;Dark Blade Pass|2000;Fiend Yeti|2680;Mythic Scrolls Product|3750;Werewolf Tiger|2350;Dog Blade|3000;Runic Fiend Yeti|3275;Divine Portal|4275;Red Lightning|4215;Super Spirit Pain|4900;East Dragon|4750;Arcsteel Magnet|4350;Fruit Notifier Pass|5000;West Dragon|5000;Purple Lightning|7880;Meme|8400;Dragon Token|9835;Ember Dragon|9585;Parrot Eagle|12000;Crimson Empyrean Kitsune|12750;Galaxy Kitsune|15000;Rabid Dog Blade|30000;Vibe (Frame Break)|21000;Doghouse (Frame Break)|24000;Eclipse Dragon|70000;Permanent Dragon Token|32570;Permanent Dragon|10000|p;Permanent Control|8500|p;Permanent Kitsune|8500|p;Permanent Magnet|7450|p;Permanent Tiger|6300|p;Permanent Yeti|6300|p;Permanent Spirit|4900|p;Permanent Gas|5250|p;Permanent Venom|7500|p;Permanent Shadow|4300|p;Permanent Dough|5000|p;Permanent Mammoth|4500|p;Permanent T-Rex|4750|p;Permanent Gravity|4550|p;Permanent Blizzard|4400|p;Permanent Pain|4475|p;Permanent Lightning|4625|p;Permanent Portal|4600|p;Permanent Phoenix|3970|p;Permanent Sound|3950|p;Permanent Spider|3825|p;Permanent Creation|3800|p;Permanent Love|3715|p;Permanent Buddha|4100|p;Permanent Quake|4050|p;Permanent Magma|3400|p;Permanent Ghost|3500|p;Permanent Rubber|3000|p;Permanent Light|3350|p;Permanent Diamond|3250|p;Permanent Eagle|3225|p;Permanent Dark|2700|p;Permanent Sand|2415|p;Permanent Ice|2150|p;Permanent Flame|1500|p;Permanent Spike|500|p;Permanent Smoke|400|p;Permanent Bomb|520|p;Permanent Spring|300|p;Permanent Chop|150|p;Permanent Spin|80|p;Permanent Rocket|70|p";
+const RAW="Blizzard|26;Shadow|25;Mammoth|28;Gravity|31;Pain|48;Spirit|36;Lime Blade|28;Buddha|56;Portal|56;Celebration Bomb|42;Topaz Diamond|64;T-Rex|105;Venom|645;Glacier Eagle|40;Scarlet Ghost|51;Dough|120;Lightning|74;Gas|300;Yeti|430;Tiger|450;Torment Pain|410;Hellfire Gas|465;Control|500;Ruby Diamond|95;Requirem Eagle|545;Yellow Lightning|480;Emerald Diamond|530;Green Lightning|635;Rose Quartz Diamond|600;Fast Boats Pass|480;X2 Boss Drops Pass|430;Starlight Gravity|800;Matrix Eagle|640;+1 Fruit Storage Pass|800;Thermite Bomb|965;X2 Mastery Pass|800;X2 Money Pass|800;Legendary Scrolls Product|1100;Kitsune|1300;Nuclear Bomb|990;Azura Bomb|1000;Frustration Pain|1500;Sadness Pain|1450;Magnet|1150;Celestial Pain|1750;Dark Blade Pass|2000;Fiend Yeti|2680;Mythic Scrolls Product|3750;Werewolf Tiger|2350;Dog Blade|3000;Runic Fiend Yeti|3275;Divine Portal|4275;Red Lightning|4215;Super Spirit Pain|4900;East Dragon|4750;Arcsteel Magnet|4350;Fruit Notifier Pass|5000;West Dragon|5000;Purple Lightning|7880;Meme|8400;Dragon Token|9835;Ember Dragon|9585;Parrot Eagle|12000;Crimson Empyrean Kitsune|12750;Galaxy Kitsune|15000;Rabid Dog Blade|30000;Vibe (Frame Break)|21000;Doghouse (Frame Break)|24000;Eclipse Dragon|70000;Permanent Dragon Token|32570;Permanent Dragon|10000|p;Permanent Control|8500|p;Permanent Kitsune|8500|p;Permanent Magnet|7450|p;Permanent Tiger|6300|p;Permanent Yeti|6300|p;Permanent Spirit|4900|p;Permanent Gas|5250|p;Permanent Venom|7500|p;Permanent Shadow|4300|p;Permanent Dough|5000|p;Permanent Mammoth|4500|p;Permanent T-Rex|4750|p;Permanent Gravity|4550|p;Permanent Blizzard|4400|p;Permanent Pain|4475|p;Permanent Lightning|4625|p;Permanent Portal|4600|p;Permanent Phoenix|3970|p;Permanent Sound|3950|p;Permanent Spider|3825|p;Permanent Creation|3800|p;Permanent Love|3715|p;Permanent Buddha|4100|p;Permanent Quake|4050|p;Permanent Magma|3400|p;Permanent Ghost|3500|p;Permanent Rubber|3000|p;Permanent Light|3350|p;Permanent Diamond|3250|p;Permanent Eagle|3225|p;Permanent Dark|2700|p;Permanent Sand|2415|p;Permanent Ice|2150|p;Permanent Flame|1500|p;Permanent Spike|500|p;Permanent Smoke|400|p;Permanent Bomb|520|p;Permanent Spring|300|p;Permanent Chop|150|p;Permanent Spin|80|p;Permanent Rocket|70|p;Permanent Fast Boats Pass|470|p;Permanent X2 Boss Drops Pass|470|p;Permanent +1 Fruit Storage Pass|560|p;Permanent X2 Mastery Pass|625|p;Permanent X2 Money Pass|625|p;Permanent Legendary Scrolls Product|660|p;Permanent Mythic Scrolls Product|1560|p;Permanent Fruit Notifier Pass|3880|p";
 const ITEMS=RAW.split(";").map(s=>{const[n,v,p]=s.split("|");return{n,v:+v,p:p==="p"}}).sort((a,b)=>b.v-a.v);
 const tier=v=>v>=20000?"#ff5fd2":v>=5000?"#b98cff":v>=1000?"#4db8ff":v>=200?"#3be0c2":v>=50?"#ffc83d":"#c3d3dc";
 const fmt=v=>v.toLocaleString("en-US");
@@ -274,40 +361,116 @@ const sum=k=>S[k].reduce((t,i)=>t+(i?i.v:0),0);
 function neutral(){const r=$("result");r.className="";r.innerHTML="<h2>Build your trade</h2><p>Pick items for both offers, then press Done.</p>"}
 function changed(){neutral();render()}
 
+const GP=new Set(["Fast Boats Pass","X2 Boss Drops Pass","+1 Fruit Storage Pass","X2 Mastery Pass","X2 Money Pass","Legendary Scrolls Product","Mythic Scrolls Product","Fruit Notifier Pass","Dark Blade Pass"]);
+const ENTRIES=(()=>{
+  const m=new Map(),get=b=>{if(!m.has(b))m.set(b,{base:b,gp:GP.has(b)});return m.get(b)};
+  ITEMS.forEach(x=>{if(x.p)get(x.n.slice(10)).perm=x;else get(x.n).norm=x});
+  return[...m.values()].sort((a,b)=>(b.norm||b.perm).v-(a.norm||a.perm).v);
+})();
+const CATS={all:()=>true,fl:e=>!e.gp,gp:e=>e.gp};
+const eVal=e=>(e.norm||e.perm).v;
+const slots=()=>[cur.i,...S[cur.k].map((_,j)=>j).filter(j=>j!==cur.i&&!S[cur.k][j])];
+const pickOf=e=>cur.choice[e.base]==="p"&&e.perm?e.perm:(e.norm||e.perm);
+const vis=(e,show)=>{e.hidden=!show};
+
 function openModal(k,i){
-  cur={k,i,t:null};
+  cur={k,i,cat:"all",multi:false,sel:[],choice:{}};
+  $("iq").value="";setCat("all");setMulti(false);
   $("rm").hidden=!S[k][i];
-  showType();
-  $("modal").classList.add("open");$("tNormal").focus();
+  showView("add");fillGrid();syncFoot();
+  $("modal").classList.add("open");
+  if(matchMedia("(pointer:fine)").matches)$("iq").focus();else $("aClose").focus();
 }
 function closeModal(){$("modal").classList.remove("open");cur=null}
-function showType(){
-  if(cur)cur.t=null;
-  $("pickStep").hidden=true;$("typeStep").hidden=false;
-  $("tNormal").focus();
+function showView(v){$("addView").hidden=v!=="add";$("verView").hidden=v!=="ver";document.querySelector("#modal .sheet").classList.toggle("compact",v==="ver")}
+function setCat(c){
+  cur.cat=c;
+  document.querySelectorAll(".chip").forEach(b=>b.setAttribute("aria-pressed",b.dataset.cat===c));
 }
-function setType(t){
-  cur.t=t;
-  $("typeStep").hidden=true;$("pickStep").hidden=false;
-  $("q").placeholder=t==="perm"?"Search permanent items":"Search normal items";
-  $("q").value="";fill("");$("q").focus();
+function setMulti(on){
+  cur.multi=on;cur.sel=[];
+  $("multiBtn").setAttribute("aria-pressed",on);
+  $("abody").classList.toggle("multi",on);
+  document.querySelectorAll(".icard.on").forEach(c=>c.classList.remove("on"));
 }
-function fill(t){
-  const l=$("list");l.innerHTML="";t=t.trim().toLowerCase();
-  const perm=cur.t==="perm";
-  const m=ITEMS.filter(x=>x.p===perm&&x.n.toLowerCase().includes(t));
-  if(!m.length){l.innerHTML='<div class="none">No items match your search.</div>';return}
-  m.forEach(x=>{
-    const b=document.createElement("button");b.className="opt";b.style.setProperty("--c",tier(x.v));
-    b.innerHTML="<span></span><b>"+fmt(x.v)+"</b>";b.firstChild.textContent=x.n;
-    b.onclick=()=>{S[cur.k][cur.i]=x;closeModal();changed()};
-    l.appendChild(b);
+function syncFoot(){
+  const n=cur.sel.length;
+  vis($("msel"),cur.multi);vis($("madd"),cur.multi);
+  $("msel").textContent=n+" selected \u00b7 room for "+slots().length;
+  $("madd").disabled=!n;
+  $("madd").textContent=n?"Add "+n+" item"+(n>1?"s":""):"Add items";
+  $("aFoot").hidden=!cur.multi&&$("rm").hidden;
+}
+function fillGrid(){
+  const g=$("agrid");g.innerHTML="";
+  const t=$("iq").value.trim().toLowerCase();
+  const m=ENTRIES.filter(e=>CATS[cur.cat](e)&&(e.base+(e.perm?" permanent "+e.base:"")).toLowerCase().includes(t));
+  $("abody").scrollTop=0;
+  if(!m.length){g.innerHTML='<div class="none">No items match your search.</div>';return}
+  m.forEach((e,n)=>{
+    const v=eVal(e),b=document.createElement("button");
+    b.type="button";b.className="icard"+(cur.sel.includes(e)?" on":"");
+    b.style.setProperty("--c",tier(v));b.style.setProperty("--d",Math.min(n,14)*16+"ms");
+    b.innerHTML='<span class="chk" aria-hidden="true">\u2713</span><span class="nm"></span><span class="meta"><em></em><b>'+fmt(v)+'</b></span>';
+    b.querySelector(".nm").textContent=e.base;
+    const em=b.querySelector("em");
+    if(!e.norm){em.textContent="Permanent only";em.className="po"}else em.textContent=e.gp?"Gamepasses":"Fruits & Limiteds";
+    b.onclick=()=>cardClick(e,b);
+    g.appendChild(b);
   });
 }
-$("tNormal").onclick=()=>setType("normal");
-$("tPerm").onclick=()=>setType("perm");
-$("back").onclick=showType;
-
+function cardClick(e,b){
+  if(cur.multi){
+    const j=cur.sel.indexOf(e);
+    if(j>=0){cur.sel.splice(j,1);b.classList.remove("on")}
+    else{
+      if(cur.sel.length>=slots().length){b.classList.remove("shake");void b.offsetWidth;b.classList.add("shake");return}
+      cur.sel.push(e);b.classList.add("on");
+    }
+    syncFoot();return;
+  }
+  if(e.norm&&e.perm)showVersion(e);else place(e.norm||e.perm);
+}
+function place(it){S[cur.k][cur.i]=it;closeModal();changed()}
+function placeMany(items){
+  const sl=slots();
+  items.forEach((it,j)=>{S[cur.k][sl[j]]=it});
+  closeModal();changed();
+}
+function showVersion(e){
+  const body=$("vBody");body.innerHTML="";
+  if(e){
+    $("vTitle").textContent="Normal or Permanent?";$("vSub").textContent=e.base;
+    const w=document.createElement("div");w.className="types";
+    [["Normal",e.norm,"#4db8ff"],["Permanent",e.perm,"var(--pumpkin)"]].forEach(([lbl,it,c])=>{
+      const b=document.createElement("button");b.type="button";b.className="typebtn";b.style.setProperty("--c",c);
+      b.innerHTML="<strong>"+lbl+'</strong><span class="tv">'+fmt(it.v)+"</span><span>value</span>";
+      b.onclick=()=>place(it);w.appendChild(b);
+    });
+    body.appendChild(w);$("vFoot").hidden=true;
+  }else{
+    $("vTitle").textContent="Choose versions";$("vSub").textContent="Normal or Permanent for each selected item.";
+    const l=document.createElement("div");l.className="vlist";
+    cur.sel.forEach((e,n)=>{
+      if(!cur.choice[e.base])cur.choice[e.base]=e.norm?"n":"p";
+      const r=document.createElement("div");r.className="vrow";r.style.setProperty("--d",Math.min(n,10)*30+"ms");
+      r.innerHTML='<span class="vn"></span><span class="seg"></span>';
+      r.firstChild.textContent=e.base;
+      const seg=r.lastChild;
+      [["n","Normal",e.norm],["p","Permanent",e.perm]].forEach(([k,lbl,it])=>{
+        const b=document.createElement("button");b.type="button";b.dataset.v=k;
+        b.innerHTML=lbl+" <b>"+(it?fmt(it.v):"\u2014")+"</b>";
+        b.disabled=!it;b.classList.toggle("on",cur.choice[e.base]===k);
+        b.onclick=()=>{cur.choice[e.base]=k;seg.querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b))};
+        seg.appendChild(b);
+      });
+      l.appendChild(r);
+    });
+    body.appendChild(l);
+    $("vInfo").textContent=cur.sel.length+" item"+(cur.sel.length>1?"s":"");$("vFoot").hidden=false;
+  }
+  showView("ver");
+}
 function openCL(){
   const l=$("clList");
   if(!l.children.length)CHANGES.forEach(([n,v,up])=>{
@@ -323,11 +486,25 @@ $("helpBtn").onclick=openCL;
 $("clClose").onclick=closeCL;
 $("clModal").onclick=e=>{if(e.target.id==="clModal")closeCL()};
 
-$("q").oninput=e=>fill(e.target.value);
-$("q").onkeydown=e=>{if(e.key==="Enter"){const f=$("list").querySelector(".opt");if(f)f.click()}};
+$("iq").oninput=fillGrid;
+$("iq").onkeydown=e=>{if(e.key==="Enter"){const f=$("agrid").querySelector(".icard");if(f)f.click()}};
+document.querySelectorAll(".chip").forEach(c=>c.onclick=()=>{setCat(c.dataset.cat);fillGrid()});
+$("multiBtn").onclick=()=>{setMulti(!cur.multi);syncFoot()};
+$("madd").onclick=()=>{
+  if(!cur.sel.length)return;
+  if(cur.sel.some(e=>e.norm&&e.perm))showVersion(null);else placeMany(cur.sel.map(e=>e.norm||e.perm));
+};
+$("vAdd").onclick=()=>placeMany(cur.sel.map(pickOf));
 $("rm").onclick=()=>{S[cur.k][cur.i]=null;closeModal();changed()};
+$("aClose").onclick=$("vClose").onclick=closeModal;
+$("vBack").onclick=()=>showView("add");
 $("modal").onclick=e=>{if(e.target.id==="modal")closeModal()};
-document.addEventListener("keydown",e=>{if(e.key==="Escape"){if($("clModal").classList.contains("open"))closeCL();else closeModal()}});
+["all","fl","gp"].forEach(k=>{$("c-"+k).textContent=ENTRIES.filter(CATS[k]).length});
+document.addEventListener("keydown",e=>{
+  if(e.key!=="Escape")return;
+  if($("clModal").classList.contains("open"))closeCL();
+  else if($("modal").classList.contains("open")){if(!$("verView").hidden)showView("add");else closeModal()}
+});
 
 $("done").onclick=()=>{
   const a=sum("a"),b=sum("b"),r=$("result");
