@@ -75,6 +75,8 @@ footer{--f-text:#8793ad;--f-hover:#d3dcf0;position:relative;flex:none;margin-top
 .f-link:hover{color:var(--f-hover)}
 .f-link:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:6px}
 .f-copy{margin:0;font-weight:600;font-size:17px;color:var(--f-text)}
+.f-legal{display:flex;flex-direction:column;gap:6px}
+.f-note{font-size:14px;opacity:.85;overflow-wrap:anywhere}
 @media(max-width:640px){header{padding:14px 16px}.btn{padding:12px 34px}footer{padding:30px 16px 28px}.f-logo{width:64px;height:64px;border-radius:18px}.f-brand{gap:18px}.grid{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 
@@ -177,7 +179,10 @@ footer::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:72
         </span>
       </div>
     </div>
-    <p class="f-copy">&copy; Macks Values. All rights reserved.</p>
+    <div class="f-legal">
+      <p class="f-copy">&copy; Macks Values. All rights reserved.</p>
+      <p class="f-copy f-note">https://macksvalues.vercel.app is a third party website that is not affiliated with Blox Fruits.</p>
+    </div>
   </div>
 <div class="web2" aria-hidden="true"><svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"><path d="M0 0L120.0 0.0M0 0L110.9 45.9M0 0L84.9 84.9M0 0L45.9 110.9M0 0L0.0 120.0M24.0 0.0Q20.2 4.0 22.2 9.2M22.2 9.2Q17.2 11.5 17.0 17.0M17.0 17.0Q11.5 17.2 9.2 22.2M9.2 22.2Q4.0 20.2 0.0 24.0M46.0 0.0Q38.8 7.7 42.5 17.6M42.5 17.6Q32.9 22.0 32.5 32.5M32.5 32.5Q22.0 32.9 17.6 42.5M17.6 42.5Q7.7 38.8 0.0 46.0M70.0 0.0Q59.0 11.7 64.7 26.8M64.7 26.8Q50.1 33.4 49.5 49.5M49.5 49.5Q33.4 50.1 26.8 64.7M26.8 64.7Q11.7 59.0 0.0 70.0M96.0 0.0Q81.0 16.1 88.7 36.7M88.7 36.7Q68.6 45.9 67.9 67.9M67.9 67.9Q45.9 68.6 36.7 88.7M36.7 88.7Q16.1 81.0 0.0 96.0"/></svg></div></footer>
 <div id="modal" role="dialog" aria-modal="true" aria-label="Item details">
